@@ -1,0 +1,32 @@
+name: Publish to npm
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      # OIDC Trusted Publishing needs npm 11.5.1+. A brand-new package can't use
+      # OIDC for its FIRST publish — bootstrap once, then add the Trusted Publisher.
+      - name: Publish
+        run: npx -y npm@latest publish --provenance --access public

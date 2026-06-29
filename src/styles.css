@@ -1,0 +1,128 @@
+/* Fancy MLM UI base styles. Low specificity (:where) so a consumer's Tailwind
+   utilities and theme tokens always win. Colors derive from currentColor, so the
+   components inherit your text color and adapt to light/dark automatically. */
+
+:where([data-fancy-mlm="downline-tree"]) {
+  font-size: 0.875rem;
+  color: inherit;
+}
+:where(.fancy-mlm-tree__list) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+:where(.fancy-mlm-tree__list .fancy-mlm-tree__list) {
+  margin-left: 0.75rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid color-mix(in oklab, currentColor 15%, transparent);
+}
+:where(.fancy-mlm-tree__row) {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.125rem 0;
+}
+:where(.fancy-mlm-tree__row.is-selected) {
+  background: color-mix(in oklab, currentColor 8%, transparent);
+  border-radius: 0.375rem;
+}
+:where(.fancy-mlm-tree__row.is-inactive) {
+  opacity: 0.55;
+}
+:where(.fancy-mlm-tree__toggle) {
+  appearance: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  width: 1.1rem;
+  height: 1.1rem;
+  line-height: 1;
+  padding: 0;
+  color: inherit;
+  font-size: 0.7rem;
+}
+:where(.fancy-mlm-tree__toggle--leaf) {
+  cursor: default;
+}
+:where(.fancy-mlm-tree__label) {
+  appearance: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.375rem;
+  color: inherit;
+  font: inherit;
+}
+:where(.fancy-mlm-tree__label:hover) {
+  background: color-mix(in oklab, currentColor 8%, transparent);
+}
+:where(.fancy-mlm-tree__name) {
+  font-weight: 500;
+}
+:where(.fancy-mlm-tree__muted, .fancy-mlm-rank__muted) {
+  opacity: 0.6;
+  font-size: 0.75rem;
+}
+
+:where([data-fancy-mlm="commission-statement"].is-empty) {
+  opacity: 0.6;
+  font-size: 0.875rem;
+  padding: 0.75rem 0;
+}
+:where(.fancy-mlm-statement__table) {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+:where(.fancy-mlm-statement__table th, .fancy-mlm-statement__table td) {
+  text-align: left;
+  padding: 0.375rem 0.5rem;
+  border-bottom: 1px solid color-mix(in oklab, currentColor 12%, transparent);
+}
+:where(.fancy-mlm-statement__num) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+:where(.fancy-mlm-statement__table tr.is-reversed) {
+  text-decoration: line-through;
+  opacity: 0.55;
+}
+:where(.fancy-mlm-statement__total) {
+  font-weight: 600;
+}
+:where(.fancy-mlm-statement__total-label) {
+  text-align: right;
+  opacity: 0.7;
+}
+
+:where([data-fancy-mlm="rank-progress"]) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+}
+:where(.fancy-mlm-rank__head) {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+:where(.fancy-mlm-rank__bar) {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, currentColor 12%, transparent);
+  overflow: hidden;
+}
+:where(.fancy-mlm-rank__fill) {
+  height: 100%;
+  border-radius: 999px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+:where(.fancy-mlm-rank__meta) {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
