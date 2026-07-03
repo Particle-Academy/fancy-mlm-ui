@@ -7,8 +7,10 @@ JSON-friendly, and agent-driveable (stable `data-mlm-*` handles), built to pair
 with [`@particle-academy/react-fancy`](https://github.com/Particle-Academy/react-fancy)
 and Tailwind v4.
 
-> **MVP (v0.x):** the three view components below. A `<PlanBuilder>` admin surface
-> and an `agent-integrations` bridge (`registerMlmBridge`) are on the roadmap.
+> **v0.2:** the three view components below, and the `DownlineTree` now renders
+> every engine tree shape from one member list — `edge="sponsor"` (unilevel) or
+> `edge="placement"` (binary / matrix). A `<PlanBuilder>` admin surface and an
+> `agent-integrations` bridge (`registerMlmBridge`) are on the roadmap.
 
 ## Install
 
@@ -27,12 +29,14 @@ Peers: `react`, `react-dom`, `tailwindcss` v4, `@particle-academy/react-fancy`.
 ```tsx
 import { DownlineTree, CommissionStatement, RankProgress } from "@particle-academy/fancy-mlm-ui";
 
-// Genealogy tree — flat member list linked by sponsorId, controlled selection.
+// Genealogy tree — flat member list, controlled selection. `edge` picks the
+// shape: "sponsor" (unilevel, default) or "placement" (binary / matrix).
 <DownlineTree
+  edge="sponsor"
   value={[
     { id: "you", label: "You", tier: "gold" },
-    { id: "a", sponsorId: "you", label: "Ada", tier: "silver" },
-    { id: "b", sponsorId: "you", label: "Bo", active: false },
+    { id: "a", sponsorId: "you", placementId: "you", label: "Ada", tier: "silver" },
+    { id: "b", sponsorId: "you", placementId: "a", label: "Bo", active: false },
   ]}
   selectedId={selected}
   onSelect={setSelected}

@@ -1,13 +1,18 @@
 import { useState, type ComponentProps, type ReactNode } from "react";
 import { cn, Badge } from "@particle-academy/react-fancy";
-import type { DownlineMember } from "./types";
+import type { DownlineEdge, DownlineMember } from "./types";
 import { buildDownline, type DownlineNode } from "./tree";
 
 type BadgeColor = ComponentProps<typeof Badge>["color"];
 
 export interface DownlineTreeProps<T extends DownlineMember = DownlineMember> {
-  /** Flat member list (controlled). Linked into a tree by `sponsorId`. */
+  /** Flat member list (controlled). Linked into a tree by `edge`. */
   value: T[];
+  /**
+   * Which pointer links the tree — `"sponsor"` (unilevel, default) or
+   * `"placement"` (binary / matrix). The same `value` renders every tree shape.
+   */
+  edge?: DownlineEdge;
   /** Render only this member's subtree. */
   rootId?: string | null;
   /** Highlight a member (controlled selection). */
@@ -27,6 +32,7 @@ export interface DownlineTreeProps<T extends DownlineMember = DownlineMember> {
  */
 export function DownlineTree<T extends DownlineMember = DownlineMember>({
   value,
+  edge = "sponsor",
   rootId,
   selectedId,
   onSelect,
@@ -34,10 +40,10 @@ export function DownlineTree<T extends DownlineMember = DownlineMember>({
   renderMember,
   className,
 }: DownlineTreeProps<T>) {
-  const forest = buildDownline(value, rootId);
+  const forest = buildDownline(value, rootId, edge);
 
   return (
-    <div data-fancy-mlm="downline-tree" className={cn("fancy-mlm-tree", className)}>
+    <div data-fancy-mlm="downline-tree" data-mlm-edge={edge} className={cn("fancy-mlm-tree", className)}>
       <ul className="fancy-mlm-tree__list" role="tree">
         {forest.map((node) => (
           <DownlineNodeView

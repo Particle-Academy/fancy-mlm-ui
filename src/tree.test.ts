@@ -44,4 +44,27 @@ describe("buildDownline", () => {
     // both have an in-list sponsor, so neither is a natural root -> empty forest, no hang
     expect(Array.isArray(forest)).toBe(true);
   });
+
+  it("links by the placement pointer for binary / matrix trees", () => {
+    // Same list, two shapes: origin is SPONSORED by root but PLACED under a.
+    const placed: DownlineMember[] = [
+      { id: "root" },
+      { id: "a", sponsorId: "root", placementId: "root" },
+      { id: "origin", sponsorId: "root", placementId: "a" },
+    ];
+
+    const sponsorTree = buildDownline(placed, "root", "sponsor");
+    expect(sponsorTree[0]!.children.map((c) => c.member.id)).toEqual(["a", "origin"]);
+
+    const placementTree = buildDownline(placed, "root", "placement");
+    // origin now hangs under a (its placement), not directly under root
+    expect(placementTree[0]!.children.map((c) => c.member.id)).toEqual(["a"]);
+    expect(placementTree[0]!.children[0]!.children.map((c) => c.member.id)).toEqual(["origin"]);
+  });
+
+  it("falls back to the sponsor pointer when placement is unset", () => {
+    const forest = buildDownline(members, "root", "placement");
+    // no placementId anywhere -> identical to the sponsor tree
+    expect(forest[0]!.children.map((c) => c.member.id)).toEqual(["a", "b"]);
+  });
 });

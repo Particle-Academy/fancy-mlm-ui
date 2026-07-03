@@ -1,4 +1,4 @@
-export type { DownlineMember, CommissionRow, CommissionStatus } from "./types";
+export type { DownlineMember, DownlineEdge, CommissionRow, CommissionStatus } from "./types";
 export { buildDownline } from "./tree";
 export type { DownlineNode } from "./tree";
 export { DownlineTree } from "./DownlineTree";
