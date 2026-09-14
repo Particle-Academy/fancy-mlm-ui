@@ -1,5 +1,7 @@
 # Fancy MLM UI
 
+[![Fancified](art/fancified.svg)](https://particle.academy)
+
 `@particle-academy/fancy-mlm-ui` — React components for
 [Fancy MLM](https://github.com/Particle-Academy/fancy-mlm-php): a **downline
 tree**, a **commission statement**, and **rank progress**. Controlled,
