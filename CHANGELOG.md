@@ -15,6 +15,8 @@ upgrading.
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-11-04
+
 ### Added
 
 - **`ReferralStats`**: referral scans, unique visitors, signups and conversion per code, scope or member, as a react-fancy bar chart over a react-fancy table. Fully controlled (`groupBy`, `metric`, `range`, `selectedKey`) with `data-mlm-*` handles on the root, every cell and every control. Takes the engines' stat rows as-is. Plus `statsChartData`, `summarizeStats` and `formatRate`, and the `ReferralStatRow` / `ReferralStatsGroupBy` / `ReferralStatsMetric` / `ReferralStatsRange` types. Additive; nothing existing changed.
