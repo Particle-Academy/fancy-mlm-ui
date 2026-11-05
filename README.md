@@ -55,6 +55,32 @@ Every member row carries a stable `data-mlm-node`, every statement row a
 `data-mlm-commission-row`, and the rank bar a `data-mlm-rank-pct` — so an agent
 reads and drives these surfaces by handle, never by scraping.
 
+### Referral stats
+
+Scans, unique visitors, signups and conversion per code, scope or member, from
+the engines' `stats()` (PHP `Mlm::stats()` rows via `toArray()`, or the Node
+`ReferralProgram.stats()` objects as they are):
+
+```tsx
+import { ReferralStats } from "@particle-academy/fancy-mlm-ui";
+
+<ReferralStats
+  rows={rows}                                  // [{ key, label?, scans, uniqueSessions, signups, conversionRate }]
+  groupBy={groupBy} onGroupByChange={setGroupBy}   // "code" | "scope" | "member"
+  metric={metric} onMetricChange={setMetric}       // what the bar chart plots
+  range={range} onRangeChange={setRange}           // { from: "2026-11-01", to: "2026-12-01" }
+  selectedKey={selected} onSelect={setSelected}
+/>
+```
+
+Every piece of state is controlled; a switch or picker appears only when you
+wire its handler. The root mirrors the state as `data-mlm-group-by`,
+`data-mlm-metric`, `data-mlm-range-from/to` and `data-mlm-selected-key`; each
+cell carries `data-mlm-stat-key` + `data-mlm-stat`, and each control sits in a
+`data-mlm-control` wrapper. Unique visitors are never summed across rows (one
+visitor can scan many codes); pass `totals` from an ungrouped query to show
+them.
+
 ## Develop
 
 ```bash

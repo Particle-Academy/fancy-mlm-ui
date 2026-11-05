@@ -20,6 +20,34 @@ export type DownlineEdge = "sponsor" | "placement";
 
 export type CommissionStatus = "pending" | "paid" | "held" | "reversed";
 
+/** What referral stats are grouped by. Mirrors the engines' `stats(groupBy)`. */
+export type ReferralStatsGroupBy = "code" | "scope" | "member";
+
+/** Which figure the chart plots. */
+export type ReferralStatsMetric = "scans" | "uniqueSessions" | "signups" | "conversionRate";
+
+/**
+ * One row of referral stats: the engines' `StatRow` (PHP `toArray()`, or the
+ * Node object as-is), plus an optional display `label`. JSON-friendly.
+ */
+export interface ReferralStatRow {
+  /** The code, scope key or member id the row is for. Also its stable handle. */
+  key: string;
+  label?: string;
+  scans: number;
+  /** Distinct hashed sessions. Never summed across rows: one visitor can scan many codes. */
+  uniqueSessions: number;
+  signups: number;
+  /** signups / uniqueSessions; 0 with no sessions; can exceed 1. */
+  conversionRate: number;
+}
+
+/** A date range as `YYYY-MM-DD` strings, `from` inclusive, `to` exclusive. */
+export interface ReferralStatsRange {
+  from: string;
+  to: string;
+}
+
 /** One row of a commission statement — mirrors the engine's RewardComputation. */
 export interface CommissionRow {
   id?: string;

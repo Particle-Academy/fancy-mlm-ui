@@ -1,4 +1,16 @@
-export type { DownlineMember, DownlineEdge, CommissionRow, CommissionStatus } from "./types";
+export type {
+  DownlineMember,
+  DownlineEdge,
+  CommissionRow,
+  CommissionStatus,
+  ReferralStatRow,
+  ReferralStatsGroupBy,
+  ReferralStatsMetric,
+  ReferralStatsRange,
+} from "./types";
+export { ReferralStats } from "./ReferralStats";
+export type { ReferralStatsProps } from "./ReferralStats";
+export { statsChartData, summarizeStats, formatRate } from "./stats";
 export { buildDownline } from "./tree";
 export type { DownlineNode } from "./tree";
 export { DownlineTree } from "./DownlineTree";
