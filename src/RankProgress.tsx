@@ -34,6 +34,9 @@ export function RankProgress({ tier, nextTier, value, target, unit, className }:
       <div
         className="fancy-mlm-rank__bar"
         role="progressbar"
+        // A progressbar needs a name, or it announces a percentage of nothing.
+        aria-label={hasTarget ? `Progress to ${nextTier}` : `${tier}: top tier`}
+        aria-valuetext={hasTarget ? `${value.toLocaleString()} of ${target.toLocaleString()}${suffix}` : undefined}
         aria-valuenow={Math.round(pct)}
         aria-valuemin={0}
         aria-valuemax={100}

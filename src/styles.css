@@ -146,7 +146,7 @@
 :where(.fancy-mlm-stats__table tr.is-selected) {
   background: color-mix(in oklab, currentColor 8%, transparent);
 }
-:where(.fancy-mlm-stats__table tfoot) {
+:where(.fancy-mlm-stats__totals) {
   font-weight: 600;
   border-top: 1px solid color-mix(in oklab, currentColor 15%, transparent);
 }

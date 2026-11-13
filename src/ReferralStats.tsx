@@ -174,7 +174,10 @@ export function ReferralStats({
                 );
               })}
             </Table.Body>
-            <tfoot>
+            {/* A second body, not a raw <tfoot>: react-fancy's Table places
+                only Head and Body inside its <table>, so a <tfoot> child was
+                rendered after the table, outside it. */}
+            <Table.Body className="fancy-mlm-stats__totals" data-mlm-totals="">
               <Table.Row>
                 <Table.Cell header>Total</Table.Cell>
                 {COLUMNS.map((c) => (
@@ -183,7 +186,7 @@ export function ReferralStats({
                   </Table.Cell>
                 ))}
               </Table.Row>
-            </tfoot>
+            </Table.Body>
           </Table>
         </>
       )}

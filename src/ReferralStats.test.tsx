@@ -46,6 +46,19 @@ describe("ReferralStats", () => {
     expect(out).toContain('data-mlm-stat-key="y" data-mlm-stat="key" data-mlm-selected="true"');
   });
 
+  it("renders the totals row inside the table, not after it", () => {
+    // A raw <tfoot> handed to react-fancy's Table lands OUTSIDE its <table>
+    // (Table only places Head and Body inside), so React logged a DOM-nesting
+    // error and the totals were not part of the table at all (lab run 601, K34).
+    const out = html(<ReferralStats rows={rows} />);
+    const tableEnd = out.lastIndexOf("</table>");
+
+    expect(tableEnd).toBeGreaterThan(-1);
+    expect(out.indexOf('data-mlm-total="scans"')).toBeLessThan(tableEnd);
+    expect(out.slice(tableEnd)).not.toContain("<tr");
+    expect(out.slice(tableEnd)).not.toContain("<tfoot");
+  });
+
   it("totals scans and signups, and leaves sessions and rate blank unless the host supplies totals", () => {
     const out = html(<ReferralStats rows={rows} />);
     expect(out).toContain('data-mlm-total="scans">6<');

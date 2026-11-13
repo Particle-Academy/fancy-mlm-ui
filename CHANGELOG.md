@@ -15,6 +15,20 @@ upgrading.
 
 ## [Unreleased]
 
+### Fixed
+
+- **`RankProgress`'s progress bar has an accessible name** (axe
+  `aria-progressbar-name`, lab run 601, K34): "Progress to {nextTier}" with an
+  `aria-valuetext` of "{value} of {target} {unit}", or "{tier}: top tier" at the
+  top. It announced a bare percentage before. Nothing to do on upgrade.
+- **`ReferralStats`' totals row is inside its table.** It was a raw `<tfoot>`
+  passed to react-fancy's `Table`, which places only `Head` and `Body` inside
+  its `<table>`, so the row rendered after the table, outside it, with a React
+  DOM-nesting error in development. It is now a second `Table.Body`
+  (`[data-mlm-totals]`, class `fancy-mlm-stats__totals`); the
+  `[data-mlm-total]` cell handles are unchanged. If your CSS targeted
+  `.fancy-mlm-stats__table tfoot`, target `.fancy-mlm-stats__totals` instead.
+
 ### Changed
 
 - **Releases need a lab-run certificate.** `publish.yml` gains a read-only
