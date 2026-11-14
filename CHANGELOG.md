@@ -15,6 +15,15 @@ upgrading.
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-11-13
+
+### Changed
+
+- **Releases need a lab-run certificate.** `publish.yml` gains a read-only
+  `lab-certificate` job that every publishing job needs: a tag is published only
+  when the fancy-labs lab has certified that exact version and commit. Consumers
+  do nothing; this changes how releases are cut, not what the package does.
+
 ### Fixed
 
 - **`RankProgress`'s progress bar has an accessible name** (axe
@@ -28,13 +37,6 @@ upgrading.
   (`[data-mlm-totals]`, class `fancy-mlm-stats__totals`); the
   `[data-mlm-total]` cell handles are unchanged. If your CSS targeted
   `.fancy-mlm-stats__table tfoot`, target `.fancy-mlm-stats__totals` instead.
-
-### Changed
-
-- **Releases need a lab-run certificate.** `publish.yml` gains a read-only
-  `lab-certificate` job that every publishing job needs: a tag is published only
-  when the fancy-labs lab has certified that exact version and commit. Consumers
-  do nothing; this changes how releases are cut, not what the package does.
 
 ## [0.4.0] - 2026-11-04
 
